@@ -1,0 +1,215 @@
+<!--
+ -  2019/4/28  lize
+ -->
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>package_ui</title>
+
+  <link rel="stylesheet" href="/style.css">
+
+  <link rel="stylesheet" type="text/css" href="http://unpkg.com/iview/dist/styles/iview.css">
+
+  <script type="text/javascript" src="http://vuejs.org/js/vue.min.js"></script>
+
+  <script type="text/javascript" src="http://unpkg.com/iview/dist/iview.min.js"></script>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</head>
+
+<body>
+
+<div id = "app" :style = {height:height}>
+
+  <Layout class="layout">
+
+      <div class="header">
+
+        <h2>
+
+          <div class="logo left">
+
+            <img style="width: 100%;height: 100%;" src="/logo.png" alt="">
+
+          </div>
+
+          <span class="ww_title">VUE项目打包可视化界面</span>
+
+        </h2>
+
+      </div>
+
+      <Content class = "contentLayout">
+
+        <div class = "contentWarp">
+
+          <div class = "searchWarch">
+
+            <div>
+
+              <i-input @on-search = "onSearch" style = "width:300px;"search enter-button class = "left" v-model="value2" placeholder="请输入需要检索的单页名称" />
+
+            </div>
+
+            <div style="display: flex;align-items: center;justify-items: center;">
+
+              <Tooltip content="设置Chunks" placement="top">
+
+                <i-button style = "margin-left: 10px;margin-top: 5px" @click = "setChunks" class = "right" type="primary">设置Chunks</i-button>
+
+              </Tooltip>
+
+              <Tooltip content="保存配置，下次直接使用" placement="top">
+
+                <i-button style = "margin-left: 10px;margin-top: 5px" @click = "saveDeploy()" class = "right" type="primary">保存配置</i-button>
+
+              </Tooltip>
+
+              <Tooltip content="npm run serve" placement="top">
+
+                <i-button style = "margin-left: 10px;margin-top: 5px" @click = "package('serve')" class = "right" type="primary">调试</i-button>
+
+              </Tooltip>
+
+              <dropdown style="margin-left: 10px">
+
+                <i-button type="primary">
+
+                  打包
+
+                  <Icon type="ios-arrow-down"></Icon>
+
+                </i-button>
+
+                <dropdown-menu slot="list">
+
+                  <dropdown-item  v-for="(item,index) in fileEvnList">
+
+                    <Tooltip :content="`npm run ${item}`" placement="top">
+
+                      <span @click = "package(item)">{{item}}环境</span>
+
+                    </Tooltip>
+
+                  </dropdown-item>
+
+                </dropdown-menu>
+
+              </dropdown>
+
+            </div>
+
+          </div>
+
+          <div class = "tableWarp">
+
+            <i-table @on-select-cancel = "onSelectCancel" @on-select-all-cancel = "onSelectAllCancel" @on-select-all = "onSelectAll" @on-select = "onSelect"  max-height = "750"  border ref="selection" :columns="columns4" :data="data1">
+
+              <template v-for="(i,i_index) in columns4" slot-scope="{ row,column,index }" :slot = "i.slot">
+
+                <div v-if=" i.key=='Chunks'" style="width: 100%;height: 100%;outline: none">
+
+                  <div  v-for="(item,item_index) in row.chunks">
+
+                    <span v-if="item_index == row.chunks.length-1"> {{item}}</span>
+
+                    <span v-else> {{item}},</span>
+
+                  </div>
+
+                </div>
+
+                <div v-if="i.slot == 'entry' || i.slot == 'template'" style="width: 100%;height: 100%;">{{row[column.key]}}</div>
+
+                <Tooltip v-if="i.slot == 'fileName' || i.slot == 'title'" style="width: 100%" v-else content="点击可修改该栏的值" placement="top">
+
+                  <div style="width: 100%;height: 100%;outline: none" contentEditable = "plaintext-only" @blur = "onBlur($event,row,column,index)">{{row[column.key]}}</div>
+
+                </Tooltip>
+
+              </template>
+
+            </i-table>
+
+          </div>
+
+        </div>
+
+      </Content>
+
+    <div class="footer">
+
+        <h2 class="left">
+
+          <span>鄂ICP备18027246号-1 CopyRight© 中设数字技术股份有限公司 版权所有</span>
+
+        </h2>
+
+        <h2 class="right">
+
+          <span style="margin-right: 25px;">Web : <a href="http://www.cbim.com.cn" target="_blank">www.cbim.com.cn</a></span>
+
+          <span>Tel：010-6602-5500</span>
+
+        </h2>
+
+    </div>
+
+    <!--设置ChunksModal-->
+    <Modal
+
+      v-model="modal1"
+
+      title="设置所有单页公共的Chunks"
+
+      @on-ok="modalSave"
+
+      @on-cancel="modalCancel">
+
+      <div class = "modalContent">
+
+        <div class = "ChunksName">Chunks名称：</div>
+
+        <div class = "ChunksListWrap">
+
+          <div class = "itemWrap" v-for="(item,index) in setChunksList" :key = "index">
+
+            <div>
+
+              <i-input v-model="item.value" placeholder="请输入Chunks名称" style="width: 260px;" />
+
+            </div>
+
+            <div class = "actionWrap">
+
+              <span class = "add" @click = "addChunks(index)">+</span>
+
+              <span v-show="setChunksList.length>1" class = "del" @click = "delChunks(index)">-</span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </Modal>
+
+    </Layout>
+
+  <spin size="large" fix v-if="spinShow"></spin>
+
+</div>
+
+</body>
+
+</html>
+
+<script src="/index.js"></script>

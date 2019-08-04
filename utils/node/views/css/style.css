@@ -1,0 +1,233 @@
+/*
+* 2019/4/28  lize
+ */
+body,html{
+
+  width: 100%;
+
+  height: 100%;
+
+}
+/***************公共***************************/
+.left{
+
+  float: left;
+
+}
+
+.right{
+
+  float: right;
+
+}
+/***********头部***************/
+.header{
+
+  position:fixed;
+
+  height: 68px;
+
+  width: 100%;
+
+  box-shadow: 0px 5px 22px 0px rgba(57, 71, 95, 0.2);
+
+  z-index: 10001;
+
+  background: #ffffff;
+
+}
+
+.header h2{
+
+  font-size:12px;
+
+  height:100%;
+
+  display: flex;
+
+  align-items: center;
+
+}
+
+.header h2 .logo {
+
+  width: 40px;
+
+  height: 35px;
+
+  margin-left:42px;
+
+}
+
+.header .ww_title{
+
+  font-size:16px;
+
+  margin-left: 20px;
+
+}
+
+.header .btnWarp{
+
+  margin-left: 20px;
+
+  cursor: pointer;
+
+}
+
+/***********中间*******************/
+.layout{
+
+  min-height: 100%;
+
+  width: 100%;
+
+  min-width: 1200px;
+
+  overflow: auto;
+
+  display: flex;
+
+}
+
+.layout .contentLayout {
+
+  margin-top: 68px;
+
+  flex: 2;
+
+  padding: 30px;
+
+}
+
+.contentWarp{
+
+  overflow: hidden;
+
+  padding: 30px;
+
+  box-shadow: 0px 5px 22px 0px rgba(57, 71, 95, 0.2);
+
+  background: #ffffff;
+
+  border-radius: 5px;
+
+}
+
+.contentWarp .searchWarch{
+
+  height: 40px;
+
+  width: 100%;
+
+  margin-bottom: 20px;
+
+  overflow: hidden;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content:space-between;
+
+  flex-flow:  row nowrap;
+
+  padding: 0 20px;
+
+}
+
+/****************底部***********************/
+.footer {
+
+  width: 100%;
+
+  background-color: #1c1e23;
+
+  padding:0;
+
+  margin: 0 auto;
+
+}
+
+.footer h2 {
+
+  font-size: 12px;
+
+  color: #787880;
+
+  padding: 18px 50px;
+
+}
+
+.footer h2 a{
+
+  color: #77777f;
+
+}
+.dropDown{
+
+  display: none;
+
+}
+.toBack:hover .dropDown{
+
+  display: block;
+
+}
+
+/************************************弹窗样式***********************************************/
+.modalContent{
+
+  display: flex;
+
+  padding: 20px;
+
+  max-height: 500px;
+
+  overflow-y: auto;
+
+}
+
+.modalContent .ChunksName{
+
+  display: flex;
+
+  justify-items: center;
+
+  align-items: center;
+
+}
+.ChunksName{
+
+  width: 100px;
+
+}
+
+.ChunksListWrap{
+
+  flex: 1;
+
+}
+.ChunksListWrap .itemWrap{
+
+  display: flex;
+
+  justify-items: center;
+
+}
+.ChunksListWrap .actionWrap{
+
+  margin-left: 10px;
+
+  overflow: hidden;
+
+}
+.ChunksListWrap .actionWrap .add,.del{
+
+  font-size: 24px;
+
+  padding: 0 5px;
+
+  cursor: pointer;
+
+}
