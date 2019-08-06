@@ -127,7 +127,7 @@
 
                 <div v-if="i.slot == 'entry' || i.slot == 'template'" style="width: 100%;height: 100%;">{{row[column.key]}}</div>
 
-                <Tooltip v-if="i.slot == 'fileName' || i.slot == 'title'" style="width: 100%" v-else content="点击可修改该栏的值" placement="top">
+                <Tooltip v-if="i.slot == 'fileName' || i.slot == 'title' || i.slot == 'description'" style="width: 100%" v-else content="点击可修改该栏的值" placement="top">
 
                   <div style="width: 100%;height: 100%;outline: none" contentEditable = "plaintext-only" @blur = "onBlur($event,row,column,index)">{{row[column.key]}}</div>
 

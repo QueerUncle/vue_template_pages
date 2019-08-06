@@ -50,6 +50,18 @@ var app = new Vue({
         },
         
         {
+    
+          title: 'Description',
+    
+          key: 'description',
+    
+          slot:'description',
+    
+          align: 'center'
+    
+        },
+        
+        {
           
           title: 'Entry',
           
@@ -239,8 +251,6 @@ var app = new Vue({
     //全选
     onSelectAll(selection){
       
-      console.log(selection,'全选');
-  
       selection.forEach((i,v) =>{
         
         if(!this.packageIdList.includes(i.entry)){
@@ -268,9 +278,7 @@ var app = new Vue({
     },
     //触发选中
     onSelect(selection,row){
-  
-      console.log(selection,'选中时触发');
-  
+      
       selection.forEach((i,v) =>{
     
         if(!this.packageIdList.includes(i.entry)){
@@ -293,16 +301,11 @@ var app = new Vue({
       
         }
     
-      });
+      })
       
-  
-      console.log(this.packageList,'选中时触发')
-  
     },
     //取消选中一个
     onSelectCancel(selection,row){
-    
-      console.log(selection,'取消单个');
       
       let n = null;
       
@@ -325,14 +328,10 @@ var app = new Vue({
         }
     
       });
-  
-      console.log(this.packageList,'取消单个')
-  
+      
     },
     //取消全选
     onSelectAllCancel(selection){
-    
-      console.log(selection,'取消全选');
       
       let T = JSON.parse(JSON.stringify(this.servePageList));
       
@@ -370,13 +369,9 @@ var app = new Vue({
         
       }
       
-      console.log(this.packageList,'取消全选')
-    
     },
     //保存配置
     saveDeploy(){
-      
-      console.log(this.data1,'data1data1data1data1data1data1');
       
       let obj = {
         
@@ -433,6 +428,8 @@ var app = new Vue({
             entry: i.entry,
       
             template: i.template,
+  
+            description:i.description,
       
             filename: `${i.fileName}.html`,
       
@@ -443,9 +440,7 @@ var app = new Vue({
           }
     
         });
-  
-        console.log(pages,'我是多页对象');
-  
+        
         let obj = {
     
           type:type,
@@ -467,8 +462,6 @@ var app = new Vue({
     },
     //调取打包接口
     packageAjax(obj){
-      
-      console.log(obj);
       
       let url = "/api/package";
       
@@ -522,6 +515,16 @@ var app = new Vue({
            
          }
          
+         for(let j = 0; j< this.packageList.length;j++){
+           
+           if(!this.packageList[j].chunks.includes(this.setChunksList[i].value)){
+  
+             this.packageList[j].chunks.push(this.setChunksList[i].value);
+             
+           }
+           
+         }
+         
        }else{
   
          this.setChunksList.splice(i,1);
@@ -531,10 +534,6 @@ var app = new Vue({
        }
        
       }
-  
-      // this.modal1 = false;
-      
-      console.log(this.setChunksList,'this.setChunksList')
       
     },
     //弹窗关闭
@@ -563,8 +562,6 @@ var app = new Vue({
     },
     //取消编译
     cancelPackage(){
-      
-      console.log('我取消了')
       
       let url = "/api/cancelPackage";
       
@@ -650,13 +647,9 @@ var app = new Vue({
 
         }
         
-        
-
       }
       
-      console.log(this.packageList,'this.packageListthis.packageListthis.packageList')
-      
-    },
+    }
     
   }
   

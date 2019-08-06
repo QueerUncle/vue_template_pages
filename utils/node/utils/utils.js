@@ -39,7 +39,9 @@ module.exports = {
         
         for (let entry of list) {
           
-          let str = entry.split('/')[1];
+          let entryList = entry.split('/');
+          
+          let str = entryList[entryList.length-1];
           
           if(str.includes('.env.')){
             
@@ -77,33 +79,41 @@ module.exports = {
       
     };
   
-    let globPathHtml = ["./src/**/index.html"]; // 入口模板正则 //不打包配置
+    let globPathHtml = [`${global.PROJECT_ROOT_DIRECTORY}/src/**/index.html`]; // 最
+
+    let globPathJs = [`${global.PROJECT_ROOT_DIRECTORY}/src/**/main.js`]; // 入口脚本正则 //不打包配置
+
+    let globPathEvn = [`${global.PROJECT_ROOT_DIRECTORY}/.**`];  //入口环境变量正则 //不打包配置
+
+    let AllPagesPath = `${global.PROJECT_ROOT_DIRECTORY}/utils/AllPages.json`;
   
-    let globPathJs = ["./src/**/main.js"]; // 入口脚本正则 //不打包配置
-  
-    let globPathEvn = ["./.**"];  //入口环境变量正则 //不打包配置
-  
-    let AllPagesPath = "./utils/AllPages.json";
-    
-    if(global.NODE_EVN === "production"){
-      
-      let variate = "";
-      
-      if(process.cwd().includes('node')){
-  
-        variate = "../";
-        
-      }
-  
-      AllPagesPath = path.resolve(process.cwd(),`${variate}../utils/AllPages.json`);
-      
-      globPathHtml = [path.resolve(process.cwd(),`${variate}../src/**/index.html`)]; // 入口模板正则  //打包配置
-  
-      globPathJs = [path.resolve(process.cwd(),`${variate}../src/**/main.js`)]; // 入口脚本正则 //打包配置
-  
-      globPathEvn = [path.resolve(process.cwd(),`${variate}../.**`)];  //入口环境变量正则 //打包配置
-      
-    }
+    // let globPathHtml = ["./src/**/index.html"]; // 入口模板正则 //不打包配置
+    //
+    // let globPathJs = ["./src/**/main.js"]; // 入口脚本正则 //不打包配置
+    //
+    // let globPathEvn = ["./.**"];  //入口环境变量正则 //不打包配置
+    //
+    // let AllPagesPath = "./utils/AllPages.json";
+    //
+    // if(global.NODE_EVN === "production"){
+    //
+    //   let variate = "";
+    //
+    //   if(process.cwd().includes('node')){
+    //
+    //     variate = "../";
+    //
+    //   }
+    //
+    //   AllPagesPath = path.resolve(process.cwd(),`${variate}../utils/AllPages.json`);
+    //
+    //   globPathHtml = [path.resolve(process.cwd(),`${variate}../src/**/index.html`)]; // 入口模板正则  //打包配置
+    //
+    //   globPathJs = [path.resolve(process.cwd(),`${variate}../src/**/main.js`)]; // 入口脚本正则 //打包配置
+    //
+    //   globPathEvn = [path.resolve(process.cwd(),`${variate}../.**`)];  //入口环境变量正则 //打包配置
+    //
+    // }
     
     let iSError = false;
     
@@ -156,6 +166,8 @@ module.exports = {
                 template: `${entry}/index.html`,
                 
                 title: data.title,
+  
+                description:data.description,
                 
                 entry: `${entry}/main.js`,
                 

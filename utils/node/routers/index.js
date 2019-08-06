@@ -21,9 +21,9 @@ const WriteFileFn = (src,path,writeContent,callBack) =>{
       
       fs.writeFile (path,writeContent, 'utf8', (error) => {
         
-        if (error) { callBack(false); return console.log (error);}
-        
-        callBack(true)
+        if (error) { callBack ? callBack(false) : "" ; return console.log (error);}
+  
+        callBack ? callBack(true) : "";
         
       })
       
@@ -31,13 +31,13 @@ const WriteFileFn = (src,path,writeContent,callBack) =>{
       
       fs.mkdir (src, (err) => {
         
-        if (err) {callBack(false);return console.error (err);}
+        if (err) {callBack ? callBack(false) : "" ;return console.error (err);}
         
         fs.writeFile (path,writeContent, 'utf8', (error) => {
           
           if (error) return console.log (error);
-          
-          callBack(true)
+  
+          callBack ? callBack(true) : "" ;
           
         })
         
@@ -73,21 +73,23 @@ const errorObj = {
   
 };
 
-let witePath = "./utils"; //不打包配置
+let witePath = `${global.PROJECT_ROOT_DIRECTORY}/utils`; //不打包配置
 
-if(global.NODE_EVN === "production"){
-  
-  let variate = "";
-  
-  if(process.cwd().includes('node')){
-  
-    variate = "../"
-  
-  }
-  
-  witePath = path.resolve(process.cwd(),`${variate}../utils`);  //打包配置
-  
-}
+// let witePath = "./utils"; //不打包配置
+
+// if(global.NODE_EVN === "production"){
+//
+//   let variate = "";
+//
+//   if(process.cwd().includes('node')){
+//
+//     variate = "../"
+//
+//   }
+//
+//   witePath = path.resolve(process.cwd(),`${variate}../utils`);  //打包配置
+//
+// }
 
 //解决跨域请求
 router.all('*', function(req, res, next){
@@ -175,6 +177,18 @@ router.post('/package',(req, res) =>{
 
 //保存配置
 router.post('/saveDeploy',(req,res) =>{
+  
+  let allPages = JSON.parse(JSON.stringify(req.body.data));
+  
+  let PageDetal = "";
+  
+  for(let i = 0;i<allPages.length;i++){
+  
+    PageDetal += "#### " + allPages[i].fileName + "：" + allPages[i].title + "\n>`\n文件名：" + allPages[i].fileName + "\n`\n\n>`\n文件描述：" + allPages[i].description + "\n`\n";
+  
+  }
+  
+  WriteFileFn(`${global.PROJECT_ROOT_DIRECTORY}/src/pages`,`${global.PROJECT_ROOT_DIRECTORY}/src/pages/Page.description.md`,PageDetal);
   
   WriteFileFn(witePath,`${witePath}/AllPages.json`,JSON.stringify(req.body),(e) =>{
     
