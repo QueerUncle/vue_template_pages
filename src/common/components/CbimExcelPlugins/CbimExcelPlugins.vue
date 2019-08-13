@@ -336,7 +336,7 @@
 
                         let str = cptable.utils.decode(936, data);
 
-                        workbook =XLSX.read(str, { type: "string" });
+                        workbook =XLSX.read(str, { type: "string",raw:true });
 
                       }
 
@@ -344,7 +344,7 @@
 
                     if(!workbook){
 
-                      workbook = this.rABS || this.isCSV ? XLSX.read(btoa(this.fixdata(data)), {type: "base64"}) :  XLSX.read(data, {type: "binary"});
+                      workbook = this.rABS || this.isCSV ? XLSX.read(btoa(this.fixdata(data)), {type: "base64",raw:true}) :  XLSX.read(data, {type: "binary",raw:true});
 
                     }
 
