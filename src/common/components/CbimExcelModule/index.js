@@ -461,6 +461,9 @@ class ExcelClass {
   
       ExcelClass.saveAs(tmpDown,`${fileName}.${format}`);
       
+      // 另一种下载的方式
+      // XLSX.writeFile(wb,`${fileName}.${format}`,wopts)
+      
       return {success:true};
   
     }
