@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "cbim:serve": "node utils/node/app.js NODE_ENV = development",
+    "cbim:serve": "node utils/node/app.js",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build"
   },

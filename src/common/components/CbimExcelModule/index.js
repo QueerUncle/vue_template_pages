@@ -438,14 +438,30 @@ class ExcelClass {
   analysisDownloadDatas(Ary,format,fileName){
     
     try{
+  
+      let bookType = format == "xls" ? "biff2" : format;
       
-      const wopts = { bookType:format, bookSST:true, type:'binary'};
+      const wopts = { bookType:bookType, bookSST:false, type:'binary'};
       
       const wb = { SheetNames: [], Sheets: {}, Props: {} };
       
       if(Ary){
         
         for(let i = 0 ;i < Ary.length; i++){
+  
+          if(Ary[i] && Ary[i].length){
+    
+            for(let j = 0; j<Ary[i].length;j++){
+      
+              for(let o in Ary[i][j]){
+        
+                Ary[i][j][o] =  Ary[i][j][o]+'\n';
+        
+              }
+      
+            }
+    
+          }
           
           wb.SheetNames.push('Sheet'+(i+1));
           
