@@ -3,6 +3,8 @@
  */
 //自动成成多页
 const utils = require ('./utils/utils');
+utils.asd()
+// utils.asd();
 //获取当前时间戳
 const Timestamp = new Date ().getTime ();
 //是否自定义拆包
@@ -16,19 +18,21 @@ const AnalyzerKey = false;
 
 const Analyzer = require ('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-console.log(utils.getPagesByGUI (),'utils.getPagesByGUI ()utils.getPagesByGUI ()utils.getPagesByGUI ()')
-
 module.exports = {
   
-  publicPath:'./', //部署应用包时的基本 URL。默认为 ./
+  // publicPath:'./', //部署应用包时的基本 URL。默认为 ./
+  publicPath:utils.asd().publicPath, //部署应用包时的基本 URL。默认为 ./
   
-  outputDir:'dist', // 生产环境构建文件的目录  默认 dist
+  // outputDir:'dist', // 生产环境构建文件的目录  默认 dist
+  outputDir:utils.asd().outputDir, // 生产环境构建文件的目录  默认 dist
   
-  assetsDir:'',  //放置生成的静态资源 (js、css、img、fonts) 的目录  默认为 ""
+  // assetsDir:'',  //放置生成的静态资源 (js、css、img、fonts) 的目录  默认为 ""
+  assetsDir:utils.asd().assetsDir,  //放置生成的静态资源 (js、css、img、fonts) 的目录  默认为 ""
   
   // pages:utils.getPages (), //单页对象。  utils.getPages() 自动生成多页对象。
+  pages:utils.asd().pages, //单页对象。  utils.getPages() 自动生成多页对象。
   
-  pages:utils.getPagesByGUI (), //单页对象。  utils.getPages() 自动生成多页对象。
+  // pages:utils.getPagesByGUI (), //单页对象。  utils.getPages() 自动生成多页对象。
   
   devServer:{  //该项参数较多，具体可参考vue_cli3的API,或者webpack的API
   

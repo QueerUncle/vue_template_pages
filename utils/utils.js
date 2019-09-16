@@ -7,8 +7,35 @@ const fs = require("fs");
 
 const path = require("path");
 
+const pageConfigPath = "./utils/pageConfig.json"
+
+const pageInfoPath = './utils/pageInfo.json';
+
 module.exports = {
-    
+  
+  //分模块打包
+    asd:() =>{
+      let pageconfig = JSON.parse(fs.readFileSync(pageConfigPath, "utf-8"));
+      console.log(pageconfig,'pageconfigpageconfigpageconfigpageconfigpageconfig')
+      let pageInfo = JSON.parse(fs.readFileSync(pageInfoPath, "utf-8"));
+      console.log(pageInfo,'pageInfopageInfopageInfopageInfopageInfopageInfopageInfo')
+      let pages = {};
+      for(let i in pageInfo){
+        console.log(pageInfo[i].entry.split("/")[pageInfo[i].entry.split("/").length-3],'00000000000000000000000000000000000000000000');
+        if(pageInfo[i].entry.split("/")[pageInfo[i].entry.split("/").length-3] == pageconfig.module) {
+          pages[i] = pageInfo[i];
+        }
+      }
+      console.log(pages,'pagespagespagespagespagespagespagespagespagespagespagespagespagespagespagespagespagespages')
+      let asdasd =  {
+        publicPath:'./',
+        outputDir:`dist/${pageconfig.module}`,
+        assetsDir:'',
+        pages:pages,
+      }
+      console.log(asdasd);
+      return asdasd
+    },
     //不带UI方法
     getPages: () => {
 
@@ -291,9 +318,9 @@ module.exports = {
 
             WriteFileFn("./src/pages", "./src/pages/Page.description.md", PageDetal);
 
-            console.log(pages, "这里是单页对象");
+            // console.log(pages, "这里是单页对象");
 
-            console.log(confDemo, "这里是配置模板");
+            // console.log(confDemo, "这里是配置模板");
 
             return pages;
 

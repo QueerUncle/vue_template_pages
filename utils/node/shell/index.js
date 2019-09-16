@@ -9,7 +9,7 @@ var kill =  require("tree-kill");
 
 // let variate = process.cwd().includes("node") ? ".." : "" ;
 
-// const currentPath = path.resolve(process.cwd(), '..', variate);
+// const currentPath = path.resolve(process.cwd(), '..', );
 //
 // console.log(process.cwd(),'process.cwd()process.cwd()process.cwd()process.cwd()')
 //

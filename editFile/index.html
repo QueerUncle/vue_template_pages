@@ -1,0 +1,71 @@
+<!--
+ -  2019/9/12  lize
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" href="./reset.css">
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+  <div class = "app">
+    <div class = "conentWrap">
+      <div class = "labelWrap">奖品设置：</div>
+      <div class = "itemWrap"></div>
+    </div>
+    <div class = "btnWrap">
+      <p class = "addBtn">添加</p>
+      <p class = "saveBtn">保存</p>
+    </div>
+  </div>
+</body>
+</html>
+
+<script>
+$(function(){
+    let num = [1]
+    var setChildNode = function(num){
+        let len = document.querySell
+      let childNode = '<div class = "childNode childNodelz">' +
+        '<div class = "imgWrap" data-num = '+i+'>' +
+        '<img src="" alt="">' +
+        '</div>' +
+        '<div class = "selectWwrap">' +
+        '<input type="text">' +
+        '<input type="text">' +
+        '<select name="" id="">' +
+        '<option value="1">1</option>' +
+        '<option value="2">2</option>' +
+        '</select>' +
+        '</div>' +
+        '<div class = "threeWrap">' +
+        '<input type="text">' +
+        '<input type="text">' +
+        '</div>' +
+        '<div class = "delWrap">' +
+        '<span class = "delBtn" data-num = '+i+'>删除</span>' +
+        '</div>'
+      '</div>'
+      $(".itemWrap").append(childNode);
+    }
+    setChildNode(num);
+    $(".addBtn").click(() =>{
+      console.log(num[num.length-1]++)
+      num.push(num[num.length-1]++);
+      console.log(num);
+      setChildNode(num);
+    })
+  $(document).on("click",'.delBtn',function(){
+    let index = $(this).data("num");
+    num.splice(num.indexOf(index),1);
+    setChildNode(num);
+  })
+//  $(".delBtn").click(() =>{
+////        console.log($(".delBtn").parents(".childNode"));
+////    $(".delBtn").parents(".childNode").remove()
+//  })
+})
+</script>

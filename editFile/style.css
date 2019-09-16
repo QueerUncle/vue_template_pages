@@ -1,0 +1,84 @@
+/*
+* 2019/9/12  lize
+ */
+.app{
+  width: 800px;
+  height:500px;
+  margin: 150px auto 0;
+  display: flex;
+  flex-direction: column;
+}
+.app .conentWrap{
+  width: 100%;
+  height:450px;
+  overflow: auto;
+  display: flex;
+}
+.app .conentWrap .labelWrap{
+  width: 100px;
+}
+.app .conentWrap .itemWrap{
+  flex: 2;
+}
+.app .itemWrap .childNode {
+  display: flex;
+  /*height:100px;*/
+  margin-bottom: 20px;
+}
+.childNode .imgWrap{
+  width: 100px;
+  border:1px solid #ccc;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+.childNode .selectWwrap{
+  width: 33.3%;
+  margin-right: 10px;
+}
+.childNode .selectWwrap input{
+  width: 100%;
+  margin-bottom: 10px;
+  height:40px;
+  line-height: 40px;
+  border-radius: 5px;
+  padding-left: 10px;
+  border:1px solid #ccc;
+}
+.childNode .selectWwrap select{
+  width: 100%;
+  height:40px;
+  line-height: 40px;
+  border-radius: 5px;
+  padding-left: 10px;
+  border:1px solid #ccc;
+}
+.childNode .threeWrap{
+  width: 33.3%;
+  margin-right: 10px;
+}
+.childNode .threeWrap input{
+  width:100%;
+  margin-bottom: 10px;
+  height:40px;
+  line-height: 40px;
+  border-radius: 5px;
+  padding-left: 10px;
+  border:1px solid #ccc;
+}
+.childNode .delWrap{
+  width: 33.3%;
+}
+.childNode .delWrap span{
+  cursor: pointer;
+}
+.app .btnWrap .addBtn,.saveBtn{
+  width: 100px;
+  float: left;
+  margin-right: 10px;
+  height: 40px;
+  line-height: 40px;
+  border:1px solid #ccc;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+}
